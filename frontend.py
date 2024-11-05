@@ -17,7 +17,7 @@ if "chat_history" not in st.session_state:
 
 if prompt:
     with st.spinner("Generating response.."):
-        generated_response = run_llm(query=prompt, chat_history=st.session_state["chat_history"])
+        generated_response = run_llm(query=prompt)
         print(generated_response)
         st.session_state["user_prompt_history"].append(prompt)
         st.session_state["chat_answers_history"].append(generated_response)
