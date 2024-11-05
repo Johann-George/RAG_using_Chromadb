@@ -9,7 +9,7 @@ load_dotenv()
 
 
 def run_llm(query: str, chat_history: List[Dict[str, Any]] = []):
-    embeddings = OllamaEmbeddings(model='llama3')
+    embeddings = OllamaEmbeddings(model='llama3.2:1b')
 
     db = Chroma(persist_directory=os.environ['CHROMA_PATH'], embedding_function=embeddings)
 

@@ -20,8 +20,8 @@ if __name__ == "__main__":
     print("splitting...")
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=400,  # Size of each chunk in characters
-        chunk_overlap=100,  # Overlap between consecutive chunks
+        chunk_size=900,  # Size of each chunk in characters
+        chunk_overlap=90,  # Overlap between consecutive chunks
         length_function=len,  # Function to compute the length of the text
         add_start_index=True,  # Flag to add start index to each chunk
     )
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     if os.path.exists(os.environ['CHROMA_PATH']):
         shutil.rmtree(os.environ['CHROMA_PATH'])
 
-    embeddings = OllamaEmbeddings(model="llama3")
+    embeddings = OllamaEmbeddings(model="llama3.2:1b")
 
     db = Chroma.from_documents(
         texts, embeddings, persist_directory=os.environ['CHROMA_PATH']
