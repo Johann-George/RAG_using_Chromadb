@@ -22,22 +22,20 @@ def run_llm(query: str, chat_history: List[Dict[str, Any]] = []):
     don't try to make up an answer. Always say "thanks for asking!" at the end of the answer.
 
             {chat_history}
-
+            
             {context}
 
             Question: {question}
 
             Helpful answer:"""
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(template)
-    prompt = prompt_template.format(chat_history=chat_history, context=context_text, question=query)
+    context = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    prompt = prompt_template.format(chat_history=chat_history, context=context, question=query)
 
     llm = ChatOllama(model="llama3")
     response_text = llm.predict(prompt)
 
-    # Append dictionary to chat history
-    chat_history.append({"query": query, "response": response_text})
     print(chat_history)
 
     formatted_response = f"{response_text}"

@@ -2,7 +2,7 @@ import os
 import shutil
 
 from dotenv import load_dotenv
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader, JSONLoader
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
@@ -12,6 +12,8 @@ load_dotenv()
 if __name__ == "__main__":
     print("Ingestion...")
 
+    # jq_schema = ".[]"
+    # loader = JSONLoader("./results.json", jq_schema=jq_schema,text_content=False)
     loader = TextLoader("./mbcet_website_data.txt")
     document = loader.load()
     print(f"loaded {len(document)} documents")
